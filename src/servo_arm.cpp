@@ -28,18 +28,6 @@ void setDefaultArm(){
     delay(500);
 }
 
-// void autoUpdateArm(Servo &servo, bool &isrunning, bool &directionUp, int &angle){
-//     if(isrunning){
-//         if(directionUp) angle += stepAngle;
-//         else angle -= stepAngle;
-
-//         if(angle < 0) angle = 0;
-//         if(angle > 180) angle = 180;
-//         servo.write(angle);
-//         delay(50);
-//     }   
-// }
-
 void servoUp(int id){
     if(id==1) updateArm(angle1 + stepAngle, 1);
     if(id==2) updateArm(angle2 + stepAngle, 2);
