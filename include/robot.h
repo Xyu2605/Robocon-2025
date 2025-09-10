@@ -1,8 +1,4 @@
-#ifndef ROBOT_H
-#define ROBOT_H
-
-const int freg = 1000;
-const int resolution = 8;
+#pragma once
 
 #define ENA1 12 // trước trái
 #define IN1_1 13
@@ -20,17 +16,21 @@ const int resolution = 8;
 #define IN3_2 17
 #define IN4_2 18 
 
-void initRobot(){
-}
+const int freq = 1000;     
+const int resolution = 8;  
 
-void mecanumWheel(int v1, int v2, int v3, int v4){}
+const int MOTOR_SPEED = 150; 
 
-void moveForward(int speed=200){}
-void moveBackward(int speed=200){}
-void turnRight(int speed=200){}
-void turnLeft(int speed=200){}
-void rorateRight(int speed=200){}
-void rorateLeft(int speed=200){}
-void stop(){}
 
-#endif
+void initRobot();
+
+void wheelSpin(int v1, int v2, int v3, int v4);
+
+void handleCommandWheel(char cmd);
+
+void moveForward(int speed);
+void moveBackward(int speed);
+void turnRight(int speed);
+void turnLeft(int speed);
+void rotateRight(int speed);
+void rotateLeft(int speed);

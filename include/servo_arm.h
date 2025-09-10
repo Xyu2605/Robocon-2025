@@ -1,11 +1,25 @@
-#ifndef SERVO_CONTROL_H
-#define SERVO_CONTROL_H 
-
+#pragma once
 #include<ESP32Servo.h>
 
-void initServo(){
-    
-}
+int angle1 = 0;
+int angle2 = 110;  
+int angle3 = 145;       
+const int stepAngle = 5; 
 
 
-#endif
+Servo servo1;
+Servo servo2;
+Servo servo3;
+
+void initServo();
+
+void setDefaultArm();
+
+void updateArm(int a, int id);
+
+void updateServo(Servo &servo, bool &running, bool &directionUp, int &angle);
+
+void servoUp(int id);
+void servoDown(int id);
+
+void receiveCommandFromEsp32(char cmd);
