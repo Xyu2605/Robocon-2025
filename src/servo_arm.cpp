@@ -65,11 +65,11 @@ void throwTheBall(){
 }
 
 void setDefaultArm(){
-    updateArm(angle1, 1);
+    setupToTakeAndThrowTheBall(1, angle1);
     delay(500);
-    updateArm(angle2, 2);
+    setupToTakeAndThrowTheBall(2, angle2);
     delay(500);
-    updateArm(angle3, 3);
+    setupToTakeAndThrowTheBall(3, angle3);
     delay(500);
 }
 
@@ -95,7 +95,6 @@ void handleCommandServo(char cmd){
     case 'X': servoDown(2); break;
     case 'E': servoUp(3); break;
     case 'D': servoDown(3); break;
-    case 'K': setDefaultArm(); break;
     case 'Z': takeTheBall(); break;
     case 'N': throwTheBall(); break;
     default : break;
