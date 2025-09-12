@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include "robot.h"
  
-
 void wheelSpin(int v1, int v2, int v3, int v4) {
   // Động cơ 1 - Bánh trước trái
   digitalWrite(IN1_1, v1 >= 0 ? HIGH : LOW);
@@ -23,8 +22,6 @@ void wheelSpin(int v1, int v2, int v3, int v4) {
   digitalWrite(IN4_2, v4 >= 0 ? LOW  : HIGH);
   ledcWrite(3, abs(v4));
 }
-
-
 
 void initRobot() {
 
@@ -54,8 +51,7 @@ void initRobot() {
   wheelSpin(0, 0, 0, 0);
 }
 
-
-void handleCommandWheel(char cmd){
+void handleCommandMotor(char cmd){
     switch (cmd){
         case 'F' :
             moveForward(MOTOR_SPEED);

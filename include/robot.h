@@ -18,16 +18,12 @@
 
 const int freq = 1000;     
 const int resolution = 8;  
-
 const int MOTOR_SPEED = 150; 
 
 
 void initRobot();
-
 void wheelSpin(int v1, int v2, int v3, int v4);
-
-void handleCommandWheel(char cmd);
-
+void handleCommandMotor(char cmd);
 void moveForward(int speed);
 void moveBackward(int speed);
 void turnRight(int speed);

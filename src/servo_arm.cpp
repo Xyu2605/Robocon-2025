@@ -19,6 +19,43 @@ void updateArm(int angleUpdate, int id){
     }
 }
 
+
+void setupToTakeAndThrowTheBall(int id, int target){
+    int *anglePtr;
+    Servo *servoPtr;
+    switch(id){
+        case 1: anglePtr = &angle1; servoPtr = &servo1; break;
+        case 2: anglePtr = &angle2; servoPtr = &servo2; break;
+        case 3: anglePtr = &angle3; servoPtr = &servo3; break;
+        default: return;
+    }
+
+    while (*anglePtr != target){
+        if (*anglePtr < target) (*anglePtr)++;
+        else if (*anglePtr > target) (*anglePtr)--;
+        servoPtr->write(*anglePtr);
+        delay(20);
+    }
+}
+
+void takeTheBall(){
+    setupToTakeAndThrowTheBall(3, 80);
+    delay(200);
+    setupToTakeAndThrowTheBall(2, 85);
+    delay(200);
+    setupToTakeAndThrowTheBall(3, 125);
+    delay(200);
+}
+
+void throwTheBall(){
+    setupToTakeAndThrowTheBall(2,145);
+    delay(200);
+    setupToTakeAndThrowTheBall(1, 180);
+    delay(200);
+    setupToTakeAndThrowTheBall(3, 180);
+    delay(200);
+}
+
 void setDefaultArm(){
     updateArm(angle1, 1);
     delay(500);
@@ -42,18 +79,18 @@ void servoDown(int id){
     Serial.println(String(angle1) + " - " + String(angle2) + " - " + String(angle3));
 }
 
-void receiveCommandFromEsp32(char cmd){
+void handleCommandServo(char cmd){
     switch(cmd){
     case 'Q': servoUp(1); break;
     case 'A': servoDown(1); break;
     case 'W': servoUp(2); break;
-    case 'S': servoDown(2); break;
+    case 'X': servoDown(2); break;
     case 'E': servoUp(3); break;
     case 'D': servoDown(3); break;
-    case 'K': setDefaultArm();break;
+    case 'K': setDefaultArm(); break;
     default : break;
   }
-}
+} 
 
 void initServo(){
     servo1.attach(35);
