@@ -1,5 +1,14 @@
 #include "servo_arm.h"
 
+int angle1 = 0;
+int angle2 = 110;
+int angle3 = 145;
+int stepAngle = 5;
+
+Servo servo1;
+Servo servo2;
+Servo servo3;
+
 void updateArm(int angleUpdate, int id){
     if (angleUpdate < 0 ) angleUpdate = 0;
     if (angleUpdate > 180) angleUpdate = 180;
@@ -18,7 +27,6 @@ void updateArm(int angleUpdate, int id){
             break;
     }
 }
-
 
 void setupToTakeAndThrowTheBall(int id, int target){
     int *anglePtr;
@@ -88,6 +96,8 @@ void handleCommandServo(char cmd){
     case 'E': servoUp(3); break;
     case 'D': servoDown(3); break;
     case 'K': setDefaultArm(); break;
+    case 'Z': takeTheBall(); break;
+    case 'N': throwTheBall(); break;
     default : break;
   }
 } 

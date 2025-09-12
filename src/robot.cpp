@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "robot.h"
  
-void wheelSpin(int v1, int v2, int v3, int v4) {
+void motorSpin(int v1, int v2, int v3, int v4) {
   // Động cơ 1 - Bánh trước trái
   digitalWrite(IN1_1, v1 >= 0 ? HIGH : LOW);
   digitalWrite(IN2_1, v1 >= 0 ? LOW  : HIGH);
@@ -48,14 +48,38 @@ void initRobot() {
   ledcAttachPin(ENB2, 3);
 
   // Stop when robot start up
-  wheelSpin(0, 0, 0, 0);
+  motorSpin(0, 0, 0, 0);
+}
+
+void moveForward(int speed) {
+  motorSpin(speed, speed, speed, speed);
+}
+
+void moveBackward(int speed) {
+  motorSpin(-speed, -speed, -speed, -speed);
+}
+
+void turnRight(int speed) {
+  motorSpin(-speed, speed, -speed, speed);
+}
+
+void turnLeft(int speed) {
+  motorSpin(speed, -speed, speed, -speed);
+}
+
+void rotateRight(int speed) {
+  motorSpin(speed, speed, -speed, -speed);
+}
+
+void rotateLeft(int speed) {
+  motorSpin(-speed, -speed, speed, speed);
 }
 
 void handleCommandMotor(char cmd){
     switch (cmd){
         case 'F' :
             moveForward(MOTOR_SPEED);
-            Serial.println("Go straight");
+            Serial.println("Go Straight");
             break;
         case 'B' :
             moveBackward(MOTOR_SPEED);
@@ -78,7 +102,7 @@ void handleCommandMotor(char cmd){
             Serial.println("Rorate Left");
             break;
         case 'S':
-            wheelSpin(0, 0, 0, 0);
+            motorSpin(0, 0, 0, 0);
             Serial.println("Stop");
             break;
         default : 
@@ -86,26 +110,3 @@ void handleCommandMotor(char cmd){
     }
 }
 
-void moveForward(int speed) {
-  wheelSpin(speed, speed, speed, speed);
-}
-
-void moveBackward(int speed) {
-  wheelSpin(-speed, -speed, -speed, -speed);
-}
-
-void turnRight(int speed) {
-  wheelSpin(-speed, speed, -speed, speed);
-}
-
-void turnLeft(int speed) {
-  wheelSpin(speed, -speed, speed, -speed);
-}
-
-void rotateRight(int speed) {
-  wheelSpin(speed, speed, -speed, -speed);
-}
-
-void rotateLeft(int speed) {
-  wheelSpin(-speed, -speed, speed, speed);
-}

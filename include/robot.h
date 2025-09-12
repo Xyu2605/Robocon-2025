@@ -22,11 +22,13 @@ const int MOTOR_SPEED = 150;
 
 
 void initRobot();
-void wheelSpin(int v1, int v2, int v3, int v4);
-void handleCommandMotor(char cmd);
+void motorSpin(int v1, int v2, int v3, int v4);
+
 void moveForward(int speed);
 void moveBackward(int speed);
 void turnRight(int speed);
 void turnLeft(int speed);
 void rotateRight(int speed);
 void rotateLeft(int speed);
+
+void handleCommandMotor(char cmd);

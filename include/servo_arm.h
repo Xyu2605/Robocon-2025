@@ -1,19 +1,18 @@
 #pragma once
 #include<ESP32Servo.h>
 
-int angle1 = 0;
-int angle2 = 110;  
-int angle3 = 145;       
-const int stepAngle = 5; 
-
-Servo servo1;
-Servo servo2;
-Servo servo3;
+extern int angle1;
+extern int angle2;
+extern int angle3;
+extern int stepAngle;
+    
+extern Servo servo1;
+extern Servo servo2;
+extern Servo servo3;
 
 void initServo();
 void setDefaultArm();
 void updateArm(int a, int id);
-void takeTheBall(int id, int target);
 void servoUp(int id);
 void servoDown(int id);
 void handleCommandServo(char cmd);
