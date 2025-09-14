@@ -3,23 +3,23 @@
  
 void motorSpin(int v1, int v2, int v3, int v4) {
   // Động cơ 1 - Bánh trước trái
-  digitalWrite(IN1_1, v1 >= 0 ? HIGH : LOW);
-  digitalWrite(IN2_1, v1 >= 0 ? LOW  : HIGH);
+  digitalWrite(IN1_1, v1 >= 0 ? LOW : HIGH);
+  digitalWrite(IN2_1, v1 >= 0 ? HIGH  : LOW);
   ledcWrite(0, abs(v1));
 
   // Động cơ 2 - Bánh trước phải
   digitalWrite(IN3_1, v2 >= 0 ? HIGH : LOW);
   digitalWrite(IN4_1, v2 >= 0 ? LOW  : HIGH);
   ledcWrite(1, abs(v2));
-
+  
   // Động cơ 3 - Bánh sau trái
   digitalWrite(IN1_2, v3 >= 0 ? HIGH : LOW);
   digitalWrite(IN2_2, v3 >= 0 ? LOW  : HIGH);
   ledcWrite(2, abs(v3));
 
   // Động cơ 4 - Bánh sau phải
-  digitalWrite(IN3_2, v4 >= 0 ? HIGH : LOW);
-  digitalWrite(IN4_2, v4 >= 0 ? LOW  : HIGH);
+  digitalWrite(IN3_2, v4 >= 0 ? LOW : HIGH);
+  digitalWrite(IN4_2, v4 >= 0 ? HIGH  : LOW);
   ledcWrite(3, abs(v4));
 }
 
