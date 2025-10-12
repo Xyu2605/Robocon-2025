@@ -1,9 +1,7 @@
 #include <Arduino.h>
-#include <WiFi.h>
-#include <ESP32Servo.h>
+#include "config.h"
 #include "servo_arm.h"
 #include "robot.h"
-#include "config.h"
 #include "magnet.h"
 
 WiFiClient espClient;
@@ -19,8 +17,12 @@ void mqttCallback(char* topic, byte* message, unsigned int length) {
   if (String(topic) == "robot/cmd") {
     if (msg.length() > 0) {
       handleCommandMotor(msg[0]);
+    }
+  }
+
+  if (String(topic) == "servo/cmd") {
+    if (msg.length() > 0) {
       handleCommandServo(msg[0]);
-      turnOnAndTurnOffMagnet(msg[0]);
     }
   }
 }
@@ -31,6 +33,7 @@ void reconnect() {
     if (client.connect("ESP32Client")) {
       Serial.println("Connected!");
       client.subscribe("robot/cmd");
+      client.subscribe("servo/cmd");
     } else {
       Serial.print("Error: ");
       Serial.print(client.state());
@@ -43,10 +46,7 @@ void reconnect() {
 void setup(){
 
   Serial.begin(115200); 
-  // digitalWrite(MAGNET_PIN, LOW);
-
-  // Serial1.begin(115200, SERIAL_8N1, RXD1, TXD1);
-  // WiFi setup
+  //WiFi setup
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
 
@@ -59,7 +59,7 @@ void setup(){
     Serial.print(".");
     retry++;
   }
-
+ 
   Serial.print("\nWiFi connected. IP: ");
   Serial.println(WiFi.localIP());
   // MQTT setup
@@ -72,7 +72,7 @@ void setup(){
 }
 
 void loop(){
-    if (WiFi.status() != WL_CONNECTED) {
+  if (WiFi.status() != WL_CONNECTED) {
     Serial.println("Lost connecting WiFi, try again...");
     WiFi.reconnect();
     delay(5000);
@@ -82,10 +82,4 @@ void loop(){
     reconnect();
   }
   client.loop();
-  // Receive data from UART
-  if (Serial1.available()){
-    char cmd = Serial1.read();
-    handleCommandMotor(cmd);
-    handleCommandServo(cmd);
-  }
 }

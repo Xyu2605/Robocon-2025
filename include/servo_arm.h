@@ -12,10 +12,11 @@ extern Servo servo3;
 
 void initServo();
 void setDefaultArm();
+void smoothMove(Servo *servo, int *currentAngle, int target);
 void updateArm(int a, int id);
 void servoUp(int id);
 void servoDown(int id);
 void handleCommandServo(char cmd);
 void takeTheBall();
 void throwTheBall();
-void setupToTakeAndThrowTheBall(int id, int target);
+void autoUpdateArm(int id, int target);
