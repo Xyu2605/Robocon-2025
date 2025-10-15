@@ -3,9 +3,9 @@
 #include <PubSubClient.h>
 
 // WiFi and MQTT config
-const char* ssid = "EVBADM";
-const char* password = "00000000";
-const char* mqttServer = "172.20.10.2";
+const char* ssid = "thuchanhAT T5";
+const char* password = "12345679";
+const char* mqttServer = "172.19.44.106";
 const int mqttPort = 1883;
 
 extern WiFiClient espClient;

@@ -113,9 +113,11 @@ void handleCommandServo(char cmd) {
 }
 
 void initServo() {
-    servo1.attach(4);
-    servo2.attach(5);
-    servo3.attach(6);
+    servo1.attach(14);
+    delay(500);
+    servo2.attach(13);
+    delay(500);
+    servo3.attach(15);
     delay(1000);
     setDefaultArm();
 }
